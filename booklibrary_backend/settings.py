@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,14 +84,7 @@ WSGI_APPLICATION = 'booklibrary_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD':config('DB_PASSWORD'),
-        'HOST':  config('DB_HOST'),
-        'PORT':  config('DB_PORT'),
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 
